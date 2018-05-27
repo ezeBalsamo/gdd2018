@@ -315,6 +315,31 @@ begin
 end
 go
 
+
+create procedure FOUR_STARS.Roles_Bajas_Altas(@rol tinyint, @estado bit)
+as
+begin
+	update FOUR_STARS.Roles
+	set estado = @estado
+	where cod_Rol = @rol
+end
+go
+
+create procedure FOUR_STARS.Dar_Alta(@rol tinyint)
+as
+begin
+	execute FOUR_STARS.Roles_Bajas_Altas @rol, 1
+end
+go
+
+create procedure FOUR_STARS.Dar_Baja(@rol tinyint)
+as
+begin
+	execute FOUR_STARS.Roles_Bajas_Altas @rol, 0
+end
+go
+
+
 --Ingresamos los Tres Roles basicos dados por el sistema
 create procedure FOUR_STARS.Ingresar_Roles_Basicos
 as
