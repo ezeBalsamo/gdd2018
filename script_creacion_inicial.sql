@@ -29,7 +29,7 @@ go
 
 create table FOUR_STARS.Usuario(
 username varchar(50) primary key,
-password varchar(225) not null,
+password varchar(32) not null,
 cod_Rol tinyint not null foreign key references FOUR_STARS.Roles (cod_Rol),
 nombre varchar(255),
 apellido varchar(255),
@@ -299,7 +299,7 @@ begin
 end
 go
 
-create procedure FOUR_STARS_Insertar_Funcion_Por_Rol(@rol tinyint, @funcion tinyint)
+create procedure FOUR_STARS.Insertar_Funcion_Por_Rol(@rol tinyint, @funcion tinyint)
 as
 begin
 	insert into FOUR_STARS.Rol_Por_Funcion(cod_Rol, cod_Funcion) values (@rol, @funcion)
@@ -325,14 +325,14 @@ begin
 end
 go
 
-create procedure FOUR_STARS.Dar_Alta(@rol tinyint)
+create procedure FOUR_STARS.Rol_Dar_Alta(@rol tinyint)
 as
 begin
 	execute FOUR_STARS.Roles_Bajas_Altas @rol, 1
 end
 go
 
-create procedure FOUR_STARS.Dar_Baja(@rol tinyint)
+create procedure FOUR_STARS.Rol_Dar_Baja(@rol tinyint)
 as
 begin
 	execute FOUR_STARS.Roles_Bajas_Altas @rol, 0
@@ -359,7 +359,7 @@ begin
 	while @contador < 13
 	begin
 		select @contador += 1
-		execute FOUR_STARS_Insertar_Funcion_Por_Rol @codigo, @contador
+		execute FOUR_STARS.Insertar_Funcion_Por_Rol @codigo, @contador
 	end
 	select @nombre = 'Recepcionista'
 	execute FOUR_STARS.Insertar_Roles @nombre
@@ -368,7 +368,7 @@ begin
 	while @contador < 13
 	begin
 		select @contador += 1
-		if (@contador in (2, 4, 8, 9, 10)) execute FOUR_STARS_Insertar_Funcion_Por_Rol @codigo, @contador
+		if (@contador in (2, 4, 8, 9, 10)) execute FOUR_STARS.Insertar_Funcion_Por_Rol @codigo, @contador
 	end
 	select @nombre = 'Guest'
 	execute FOUR_STARS.Insertar_Roles @nombre
@@ -377,10 +377,75 @@ begin
 	while @contador < 9
 	begin
 		select @contador += 1
-		execute FOUR_STARS_Insertar_Funcion_Por_Rol @codigo, @contador
+		execute FOUR_STARS.Insertar_Funcion_Por_Rol @codigo, @contador
 	end
 end
 go
 
 execute FOUR_STARS.Ingresar_Roles_Basicos
 drop procedure FOUR_STARS.Ingresar_Roles_Basicos
+go
+--Usuarios
+
+create procedure FOUR_STARS.IngresarUsuarios(@username varchar(50), @password varchar(225), @cod_Rol tinyint, @nombre varchar(255), @apellido varchar(255), @tipoDocumento varchar(255), @numeroDocumento numeric(18,2), @email nvarchar(255), @telefono varchar(12), @direccion varchar(225), @fechaDeNacimiento datetime)
+as
+begin
+	declare @contraseniaEnClave nvarchar(32) = HASHBYTES('SHA2_256', @password)
+	insert into FOUR_STARS.Usuario (username, password, cod_Rol, nombre, apellido, tipoDocumento, numeroDocumento, email, telefono, direccion, fechaDeNacimiento)
+	values (@username, @contraseniaEnClave, @cod_Rol, @nombre, @apellido, @tipoDocumento, @numeroDocumento, @email, @telefono, @direccion, @fechaDeNacimiento)
+end
+go
+
+create procedure FOUR_STARS.Insertar_Hoteles_Para_Usuarios(@usuario nvarchar(50), @codHotel int)
+as
+begin
+	insert into FOUR_STARS.Usuario_Por_Hotel (username, codHotel) values (@usuario, @codHotel)
+end
+go
+
+execute FOUR_STARS.IngresarUsuarios 'admin', 'w23e', 1, null, null, null, null, null, null, null, null
+go
+create procedure FOUR_STARS.IngresarHotelesAdmin
+as
+begin
+	declare @hotel int
+	declare hoteles cursor for select codHotel from FOUR_STARS.Hotel
+	open hoteles
+	fetch next from hoteles into @hotel
+	while @@FETCH_STATUS = 0
+	begin
+	execute FOUR_STARS.Insertar_Hoteles_Para_Usuarios 'admin', @hotel
+	fetch next from hoteles into @hotel
+	end
+	close hoteles
+	deallocate hoteles 
+end
+go
+
+execute FOUR_STARS.IngresarHotelesAdmin
+go
+create procedure FOUR_STARS.Usuarios_Bajas_Altas(@usuario nvarchar(50), @estado bit)
+as
+begin
+	update FOUR_STARS.Usuario
+	set estado = @estado
+	where username = @usuario
+end
+go
+
+create procedure FOUR_STARS.Usuarios_Dar_Alta(@usuario nvarchar(50))
+as
+begin
+	execute FOUR_STARS.Usuarios_Bajas_Altas @usuario, 1
+end
+go
+
+create procedure FOUR_STARS.Usuarios_Dar_Baja(@usuario nvarchar(50))
+as
+begin
+	execute FOUR_STARS.Usuarios_Bajas_Altas @usuario, 0
+end
+go
+
+
+
