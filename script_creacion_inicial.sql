@@ -339,6 +339,14 @@ begin
 end
 go
 
+create procedure FOUR_STARS.Roles_Quitar_Funciones(@rol tinyint, @funcion tinyint)
+as
+begin
+	delete FOUR_STARS.Rol_Por_Funcion
+	where cod_Rol = @rol and cod_Funcion = @funcion
+end
+go
+
 
 --Ingresamos los Tres Roles basicos dados por el sistema
 create procedure FOUR_STARS.Ingresar_Roles_Basicos
