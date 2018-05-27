@@ -29,7 +29,7 @@ go
 
 create table FOUR_STARS.Usuario(
 username varchar(50) primary key,
-password varchar(32) not null,
+password varbinary(32) not null,
 cod_Rol tinyint not null foreign key references FOUR_STARS.Roles (cod_Rol),
 nombre varchar(255),
 apellido varchar(255),
@@ -390,7 +390,7 @@ go
 create procedure FOUR_STARS.IngresarUsuarios(@username varchar(50), @password varchar(225), @cod_Rol tinyint, @nombre varchar(255), @apellido varchar(255), @tipoDocumento varchar(255), @numeroDocumento numeric(18,2), @email nvarchar(255), @telefono varchar(12), @direccion varchar(225), @fechaDeNacimiento datetime)
 as
 begin
-	declare @contraseniaEnClave nvarchar(32) = HASHBYTES('SHA2_256', @password)
+	declare @contraseniaEnClave varbinary(32) = HASHBYTES('SHA2_256', @password)
 	insert into FOUR_STARS.Usuario (username, password, cod_Rol, nombre, apellido, tipoDocumento, numeroDocumento, email, telefono, direccion, fechaDeNacimiento)
 	values (@username, @contraseniaEnClave, @cod_Rol, @nombre, @apellido, @tipoDocumento, @numeroDocumento, @email, @telefono, @direccion, @fechaDeNacimiento)
 end
@@ -424,6 +424,9 @@ go
 
 execute FOUR_STARS.IngresarHotelesAdmin
 go
+
+drop procedure FOUR_STARS.IngresarHotelesAdmin
+go
 create procedure FOUR_STARS.Usuarios_Bajas_Altas(@usuario nvarchar(50), @estado bit)
 as
 begin
@@ -448,4 +451,14 @@ end
 go
 
 
-
+--Login
+create function FOUR_STARS.Login(@usuario nvarchar(50), @password varchar(255))
+returns bit
+as
+begin
+	declare @valido bit = 0
+	if exists (select username from FOUR_STARS.Usuario where username = @usuario and password = (HASHBYTES('SHA2_256', @password))) select @valido = 1
+	
+	return @valido
+end
+go
