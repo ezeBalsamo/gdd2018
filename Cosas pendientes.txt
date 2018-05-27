@@ -4,4 +4,3 @@ Por ejemplo:
 Habría que hacer una función que inserte, una que de de baja (cambiar estado a 0) y una que permita modificar
 
 2) Hay que ir haciendo la aplicación, por suerte nos dan una template sobre la cual trabajar
-3) También hay que ver cómo se conecta la aplicación a la base de datos
