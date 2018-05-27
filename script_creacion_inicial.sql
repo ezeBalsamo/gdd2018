@@ -15,7 +15,7 @@ estado bit default (1),
 )
 go
 create table FOUR_STARS.Roles(
-cod_Rol tinyint primary key,
+cod_Rol tinyint identity (1,1)primary key,
 rol_nombre varchar(20),
 estado bit default (1)
 )
@@ -284,40 +284,70 @@ go
 drop table gd_esquema.Maestra
 go
 
-select * from FOUR_STARS.Funciones
-
-
+--Ingresamos las Funciones del Sistema
 insert into FOUR_STARS.Funciones(cod_Funcion, funcion_nombre)
 values(1, 'AMB de Rol'), (2, 'Login y seguridad'), (3, 'AMB de Usuario'), (4, 'AMB de Cliente (huespedes)'),(5, 'AMB de Hotel'),
 (6, 'AMB de Habitacion'), (7, 'AMB Regmien de estadia'), (8, 'Generar o modificar una reserva'), (9, 'Cancelar Reserva'), (10, 'Registrar Estadia'),
 (11, 'Registrar consumibles'), (12, 'Facturar estadia'), (13, 'Listado Estadistico')
 go
 
-insert into FOUR_STARS.Roles(cod_Rol, rol_nombre)
-values(1, 'Administrador'), (2, 'Recepcionista'), (3, 'Guest')
+--Ingresamos las funciones para ingresar los Roles
+create procedure FOUR_STARS.Insertar_Roles(@nombre nvarchar(20))
+as
+begin
+		insert into FOUR_STARS.Roles(rol_nombre) values (@nombre)
+end
 go
 
-insert into FOUR_STARS.Rol_Por_Funcion(cod_Funcion, cod_Rol)
---Login: solo administradores y recepcionistas
-values (2, 1), (2, 2),
---AMB Usuario, solo Administrador
-(3, 1),
---AMB Clientes, solo recepcionistas y administradores
-(4,1 ), (4, 2),
---AMb de Hotel, solo Administrador
-(5, 1),
---AMB de Habitacion, solo Administrador
-(6, 1),
--- AMB de Regmien de estadia, solo Administrador
-(7, 1),
---Generar/modificar reserva, recepcionistas y usuarios y administradores
-(8, 1), (8, 2), (8,3),
---Cancelar reserva, usuario o recepcionistas o administradores
-(9,1), (9,2), (9, 3),
---Registrar Estadia, recepcionista, o administrador
-(10, 1), (10, 2),
---Registrar consumibles, facturar y listado estadistico, todas de administrador
-(11, 1), (12, 1), (13, 1)
+create procedure FOUR_STARS_Insertar_Funcion_Por_Rol(@rol tinyint, @funcion tinyint)
+as
+begin
+	insert into FOUR_STARS.Rol_Por_Funcion(cod_Rol, cod_Funcion) values (@rol, @funcion)
+end
 go
 
+create function FOUR_STARS.EncontrarID_Rol(@rol nvarchar(20))
+returns tinyint
+begin
+	declare @codigo tinyint
+	select @codigo = cod_Rol from FOUR_STARS.Roles where rol_nombre = @rol
+	return @codigo
+end
+go
 
+--Ingresamos los Tres Roles basicos dados por el sistema
+create procedure FOUR_STARS.Ingresar_Roles_Basicos
+as
+begin
+	declare @nombre nvarchar(20) = 'Administrador'
+	execute FOUR_STARS.Insertar_Roles @nombre
+	declare @codigo tinyint = (select FOUR_STARS.EncontrarID_Rol(@nombre))
+	declare @contador tinyint = 0
+	while @contador < 13
+	begin
+		select @contador += 1
+		execute FOUR_STARS_Insertar_Funcion_Por_Rol @codigo, @contador
+	end
+	select @nombre = 'Recepcionista'
+	execute FOUR_STARS.Insertar_Roles @nombre
+	select @codigo = (select FOUR_STARS.EncontrarID_Rol(@nombre))
+	select @contador = 0
+	while @contador < 13
+	begin
+		select @contador += 1
+		if (@contador in (2, 4, 8, 9, 10)) execute FOUR_STARS_Insertar_Funcion_Por_Rol @codigo, @contador
+	end
+	select @nombre = 'Guest'
+	execute FOUR_STARS.Insertar_Roles @nombre
+	select @codigo = (select FOUR_STARS.EncontrarID_Rol(@nombre))
+	select @contador = 7
+	while @contador < 9
+	begin
+		select @contador += 1
+		execute FOUR_STARS_Insertar_Funcion_Por_Rol @codigo, @contador
+	end
+end
+go
+
+execute FOUR_STARS.Ingresar_Roles_Basicos
+drop procedure FOUR_STARS.Ingresar_Roles_Basicos
