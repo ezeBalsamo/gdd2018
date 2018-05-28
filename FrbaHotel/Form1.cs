@@ -10,11 +10,26 @@ using System.Windows.Forms;
 
 namespace FrbaHotel
 {
-    public partial class Form1 : Form
+    public partial class Inicio : Form
     {
-        public Form1()
+        public Inicio()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var newForm = new Login.Login();
+            newForm.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var newForm = new Principal();
+            newForm.Show();
+            Globals.tipoRol = 3;
+            this.Hide();
         }
     }
 }

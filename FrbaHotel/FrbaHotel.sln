@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrbaHotel", "FrbaHotel.csproj", "{770CF46A-7F13-42E4-8148-20D838EB9CB8}"
 EndProject
 Global
