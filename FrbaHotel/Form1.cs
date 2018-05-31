@@ -28,7 +28,7 @@ namespace FrbaHotel
         {
             var newForm = new Principal();
             newForm.Show();
-            Globals.tipoRol = 3;
+   //         Globals.tipoRol = 3;
             this.Hide();
         }
     }

@@ -19,23 +19,32 @@ namespace FrbaHotel.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string query = string.Format("Select FOUR_STARS.Login ('{0}','{1}')",
-                                              usuario.Text,
-                                              password.Text);
-                                              
-             int status = Operaciones.InsertQuery(query);
-             if (status == 1)
-             {
+                      
+        //    string query = string.Format("Select FOUR_STARS.Login('{0}', '{1}')",
+          //                                    usuario.Text,
+            //                                  password.Text);
 
-                 Globals.usuario = usuario.Text;
-                 string query2 = string.Format("Select cod_Rol from FOUR_STARS.Usuario where username = '{0}'", Globals.usuario);
-                 Globals.tipoRol = Operaciones.InsertQuery(query2);
-                 var newForm = new Principal();
-                 newForm.Show();
-                 this.Hide();
-             }
-             else this.Hide();
+            //DataSet correcto = Operaciones.SelectQuery(query);
+            //bool correctoValor = correcto.Tables[0].Rows[0][0].ToString();
+            // if ( == true)
+             //{
+
+//                 Globals.usuario = usuario.Text;
+  //               string query2 = string.Format("Select cod_Rol from FOUR_STARS.Usuario where username = '{0}'", Globals.usuario);
+    //             DataSet BuscarRol = Operaciones.SelectQuery(query2);
+      //           string RolNumero = BuscarRol.Tables[0].Rows[0][0].ToString();
+        //         Globals.tipoRol = Int32.Parse(RolNumero);
+          //       var newForm = new Principal();
+            //     newForm.Show();
+              //   this.Hide();
+             //}
+ //            else MessageBox.Show("Error");
                         
+        }
+
+        private void usuario_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -68,12 +68,15 @@
     <Compile Include="AbmRol\agregarRol.Designer.cs">
       <DependentUpon>agregarRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\Funciones_Roles.cs" />
     <Compile Include="AbmRol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AbmRol\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\funcionesRol.cs" />
+    <Compile Include="BD.cs" />
     <Compile Include="CancelarReserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +139,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Form1.resx">

@@ -22,3 +22,4 @@ C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateRes
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.Inicio.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.Principal.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.Login.Login.resources
+C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.Form1.resources
