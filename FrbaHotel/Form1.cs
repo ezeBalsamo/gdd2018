@@ -15,20 +15,29 @@ namespace FrbaHotel
         public Inicio()
         {
             InitializeComponent();
+            Globals.tipoRol = 3;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var newForm = new Login.Login();
-            newForm.Show();
-            this.Hide();
+            if (Globals.tipoRol != 0)
+            {
+                var newForm = new Login.Login();
+                newForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Acceso restringido");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             var newForm = new Principal();
+            Globals.tipoRol = 3;
             newForm.Show();
-   //         Globals.tipoRol = 3;
+            
             this.Hide();
         }
     }

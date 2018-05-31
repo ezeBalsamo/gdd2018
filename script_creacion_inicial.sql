@@ -385,6 +385,18 @@ go
 execute FOUR_STARS.Ingresar_Roles_Basicos
 drop procedure FOUR_STARS.Ingresar_Roles_Basicos
 go
+
+--Encontar ID_Funcion
+create function FOUR_STARS.EncontrarID_Funcion(@funcion nvarchar(20))
+returns int
+begin
+	declare @codigo int
+	select @codigo = cod_Funcion from FOUR_STARS.Funciones where funcion_nombre = @funcion
+	return @codigo
+end
+go
+
+
 --Usuarios
 
 create procedure FOUR_STARS.IngresarUsuarios(@username varchar(50), @password varchar(225), @cod_Rol int, @nombre varchar(255), @apellido varchar(255), @tipoDocumento varchar(255), @numeroDocumento numeric(18,2), @email nvarchar(255), @telefono varchar(12), @direccion varchar(225), @fechaDeNacimiento datetime)
@@ -464,4 +476,3 @@ end
 go
 
 
-select * from FOUR_STARS.Rol_Por_Funcion

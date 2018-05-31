@@ -58,13 +58,16 @@ namespace FrbaHotel.AbmRol
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string nuevoNombre = textBox1.Text;
-            int retorno = funcionesRol.CambiarNombre(nombreRol, nuevoNombre);
-            if (retorno > 0)
+            if (!string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("Exito al Cambiar nombre");
-                nombreRol = nuevoNombre;
-                ActualizarListas();
+                string nuevoNombre = textBox1.Text;
+                int retorno = funcionesRol.CambiarNombre(nombreRol, nuevoNombre);
+                if (retorno > 0)
+                {
+                    MessageBox.Show("Exito al Cambiar nombre");
+                    nombreRol = nuevoNombre;
+                    ActualizarListas();
+                }
             }
 
         }

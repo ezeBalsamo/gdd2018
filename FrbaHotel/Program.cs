@@ -17,14 +17,15 @@ namespace FrbaHotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Inicio());
-            Application.Run(new Principal());
+            Application.Run(new Inicio());
+            
         }
     }
     public static class Globals
     {
         public static int tipoRol = 0;
         public static string usuario = " ";
+        public static int codHotel = 0;
     }
 
    

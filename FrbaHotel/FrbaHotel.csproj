@@ -75,7 +75,15 @@
       <DependentUpon>Roles.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\funcionesRol.cs" />
-    <Compile Include="AbmRol\RolTipo.cs" />
+    <Compile Include="AbmUsuario\DELusuario.cs" />
+    <Compile Include="AbmUsuario\FormUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmUsuario\FormUsuario.Designer.cs">
+      <DependentUpon>FormUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmUsuario\funcionesUsuario.cs" />
+    <Compile Include="AmbHotel\Hotel.cs" />
     <Compile Include="BD.cs" />
     <Compile Include="CancelarReserva\Form1.cs">
       <SubType>Form</SubType>
@@ -112,6 +120,13 @@
     <Compile Include="Login\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\funcionesLogin.cs" />
+    <Compile Include="Login\hotelesUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\hotelesUsuario.Designer.cs">
+      <DependentUpon>hotelesUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +153,9 @@
     <EmbeddedResource Include="AbmRol\Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmUsuario\FormUsuario.resx">
+      <DependentUpon>FormUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\hotelesUsuario.resx">
+      <DependentUpon>hotelesUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

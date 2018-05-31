@@ -172,6 +172,21 @@ namespace FrbaHotel.AbmRol
             }
             return resultado;
         }
+
+        public static int BuscarCodigo(string nombre)
+        {
+            int codigo = 0;
+            using (SqlConnection Con = BD.ObtenerConexion())
+            {
+                SqlCommand Comando = new SqlCommand(string.Format("select FOUR_STARS.EncontrarID_Rol('{0}')", nombre), Con);
+                SqlDataReader reader = Comando.ExecuteReader();
+                reader.Read()
+                codigo = reader.GetInt32(0);
+                Con.Close();
+               
+            }
+             return codigo;
+        }
         
        
     

@@ -12,33 +12,60 @@ namespace FrbaHotel.Login
 {
     public partial class Login : Form
     {
+        int intentosFallidos { get; set; }
+        
         public Login()
         {
             InitializeComponent();
+            intentosFallidos = 0;
         }
+        public void fallar()
+        {
+            intentosFallidos++;
+        }
+        public void restaurar()
+        {
+            intentosFallidos = 0;
+        }
+               
+        
+
+
+    
 
         private void button1_Click(object sender, EventArgs e)
         {
-                      
-        //    string query = string.Format("Select FOUR_STARS.Login('{0}', '{1}')",
-          //                                    usuario.Text,
-            //                                  password.Text);
+            if (!string.IsNullOrWhiteSpace(usuario.Text))
+            {
+                if (!string.IsNullOrWhiteSpace(password.Text))
+                {
+                    int registro = funcionesLogin.logearse(usuario.Text, password.Text);
+                    if (registro == 0)
+                    {
+                        fallar();
 
-            //DataSet correcto = Operaciones.SelectQuery(query);
-            //bool correctoValor = correcto.Tables[0].Rows[0][0].ToString();
-            // if ( == true)
-             //{
+                        MessageBox.Show("Login incorrecto");
+                        if (intentosFallidos > 2)
+                        {
+                            MessageBox.Show("Intentos Agotados, no podra acceder");
+                            Globals.tipoRol = 0;
+                            this.Hide();
+                        }
 
-//                 Globals.usuario = usuario.Text;
-  //               string query2 = string.Format("Select cod_Rol from FOUR_STARS.Usuario where username = '{0}'", Globals.usuario);
-    //             DataSet BuscarRol = Operaciones.SelectQuery(query2);
-      //           string RolNumero = BuscarRol.Tables[0].Rows[0][0].ToString();
-        //         Globals.tipoRol = Int32.Parse(RolNumero);
-          //       var newForm = new Principal();
-            //     newForm.Show();
-              //   this.Hide();
-             //}
- //            else MessageBox.Show("Error");
+                    }
+                    else
+                    {
+                        restaurar();
+                        Globals.tipoRol = funcionesLogin.obtenerRol(usuario.Text);
+                        var photelesUsuario = new hotelesUsuario();
+                        photelesUsuario.usuario = usuario.Text;
+                        photelesUsuario.inicializarTabla();
+                        photelesUsuario.Show();
+                        this.Hide();
+                    }
+                }
+            }
+
                         
         }
 
