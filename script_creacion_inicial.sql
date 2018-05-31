@@ -9,28 +9,28 @@ GO
 --Creamos las tablas
 
 create table FOUR_STARS.Funciones(
-cod_Funcion tinyint primary key,
+cod_Funcion int primary key,
 funcion_nombre varchar(35),
 estado bit default (1),
 )
 go
 create table FOUR_STARS.Roles(
-cod_Rol tinyint identity (1,1)primary key,
+cod_Rol int identity (1,1)primary key,
 rol_nombre varchar(20),
 estado bit default (1)
 )
 go
 create table FOUR_STARS.Rol_Por_Funcion(
 codRxF int identity (1,1) primary key,
-cod_Funcion tinyint not null foreign key references FOUR_STARS.Funciones (cod_Funcion),
-cod_Rol tinyint not null foreign key references FOUR_STARS.Roles (cod_Rol),
+cod_Funcion int not null foreign key references FOUR_STARS.Funciones (cod_Funcion),
+cod_Rol int not null foreign key references FOUR_STARS.Roles (cod_Rol),
 )
 go
 
 create table FOUR_STARS.Usuario(
 username varchar(50) primary key,
 password varbinary(32) not null,
-cod_Rol tinyint not null foreign key references FOUR_STARS.Roles (cod_Rol),
+cod_Rol int not null foreign key references FOUR_STARS.Roles (cod_Rol),
 nombre varchar(255),
 apellido varchar(255),
 tipoDocumento varchar(255),
@@ -183,7 +183,6 @@ itemMonto int null,
 )
 go
 
-
 --Creamos una tabla auxiliar
 create table FOUR_STARS.HotelAuxiliar(
 id int identity(1,1),
@@ -299,7 +298,7 @@ begin
 end
 go
 
-create procedure FOUR_STARS.Insertar_Funcion_Por_Rol(@rol tinyint, @funcion tinyint)
+create procedure FOUR_STARS.Insertar_Funcion_Por_Rol(@rol int, @funcion int)
 as
 begin
 	insert into FOUR_STARS.Rol_Por_Funcion(cod_Rol, cod_Funcion) values (@rol, @funcion)
@@ -307,16 +306,15 @@ end
 go
 
 create function FOUR_STARS.EncontrarID_Rol(@rol nvarchar(20))
-returns tinyint
+returns int
 begin
-	declare @codigo tinyint
+	declare @codigo int
 	select @codigo = cod_Rol from FOUR_STARS.Roles where rol_nombre = @rol
 	return @codigo
 end
 go
 
-
-create procedure FOUR_STARS.Roles_Bajas_Altas(@rol tinyint, @estado bit)
+create procedure FOUR_STARS.Roles_Bajas_Altas(@rol int, @estado bit)
 as
 begin
 	update FOUR_STARS.Roles
@@ -325,21 +323,23 @@ begin
 end
 go
 
-create procedure FOUR_STARS.Rol_Dar_Alta(@rol tinyint)
+create procedure FOUR_STARS.Rol_Dar_Alta(@rol int)
 as
 begin
 	execute FOUR_STARS.Roles_Bajas_Altas @rol, 1
 end
 go
 
-create procedure FOUR_STARS.Rol_Dar_Baja(@rol tinyint)
+
+create procedure FOUR_STARS.Rol_Dar_Baja(@rol int)
 as
 begin
 	execute FOUR_STARS.Roles_Bajas_Altas @rol, 0
 end
 go
 
-create procedure FOUR_STARS.Roles_Quitar_Funciones(@rol tinyint, @funcion tinyint)
+
+create procedure FOUR_STARS.Roles_Quitar_Funciones(@rol int, @funcion int)
 as
 begin
 	delete FOUR_STARS.Rol_Por_Funcion
@@ -354,8 +354,8 @@ as
 begin
 	declare @nombre nvarchar(20) = 'Administrador'
 	execute FOUR_STARS.Insertar_Roles @nombre
-	declare @codigo tinyint = (select FOUR_STARS.EncontrarID_Rol(@nombre))
-	declare @contador tinyint = 0
+	declare @codigo int = (select FOUR_STARS.EncontrarID_Rol(@nombre))
+	declare @contador int = 0
 	while @contador < 13
 	begin
 		select @contador += 1
@@ -387,7 +387,7 @@ drop procedure FOUR_STARS.Ingresar_Roles_Basicos
 go
 --Usuarios
 
-create procedure FOUR_STARS.IngresarUsuarios(@username varchar(50), @password varchar(225), @cod_Rol tinyint, @nombre varchar(255), @apellido varchar(255), @tipoDocumento varchar(255), @numeroDocumento numeric(18,2), @email nvarchar(255), @telefono varchar(12), @direccion varchar(225), @fechaDeNacimiento datetime)
+create procedure FOUR_STARS.IngresarUsuarios(@username varchar(50), @password varchar(225), @cod_Rol int, @nombre varchar(255), @apellido varchar(255), @tipoDocumento varchar(255), @numeroDocumento numeric(18,2), @email nvarchar(255), @telefono varchar(12), @direccion varchar(225), @fechaDeNacimiento datetime)
 as
 begin
 	declare @contraseniaEnClave varbinary(32) = HASHBYTES('SHA2_256', @password)
@@ -462,3 +462,6 @@ begin
 	return @valido
 end
 go
+
+
+select * from FOUR_STARS.Rol_Por_Funcion

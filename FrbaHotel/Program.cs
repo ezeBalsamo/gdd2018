@@ -18,7 +18,7 @@ namespace FrbaHotel
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Inicio());
-            Application.Run(new AbmRol.Roles());
+            Application.Run(new Principal());
         }
     }
     public static class Globals

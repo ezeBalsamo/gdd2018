@@ -15,7 +15,6 @@ C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.pdb
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\bin\Debug\FrbaHotel.exe
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\bin\Debug\FrbaHotel.pdb
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
-C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.agregarRol.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.Roles.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
@@ -23,3 +22,4 @@ C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.Inicio.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.Principal.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.Login.Login.resources
 C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.Form1.resources
+C:\Users\ABM\Desktop\tp\gdd2018\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.agregarFuncion.resources

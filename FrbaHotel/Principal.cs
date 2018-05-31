@@ -17,6 +17,14 @@ namespace FrbaHotel
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var pRoles = new AbmRol.Roles();
+            pRoles.Show();
+            pRoles.ActualizarListas();
+            
+        }
+
         
     }
 }

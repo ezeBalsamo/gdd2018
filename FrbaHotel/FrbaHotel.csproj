@@ -62,20 +62,20 @@
     <Compile Include="AbmRegimen\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\agregarRol.cs">
+    <Compile Include="AbmRol\agregarFuncion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\agregarRol.Designer.cs">
-      <DependentUpon>agregarRol.cs</DependentUpon>
+    <Compile Include="AbmRol\agregarFuncion.Designer.cs">
+      <DependentUpon>agregarFuncion.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\Funciones_Roles.cs" />
-    <Compile Include="AbmRol\Form1.cs">
+    <Compile Include="AbmRol\Roles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmRol\Roles.Designer.cs">
+      <DependentUpon>Roles.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\funcionesRol.cs" />
+    <Compile Include="AbmRol\RolTipo.cs" />
     <Compile Include="BD.cs" />
     <Compile Include="CancelarReserva\Form1.cs">
       <SubType>Form</SubType>
@@ -132,11 +132,11 @@
     <Compile Include="RegistrarEstadia\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AbmRol\agregarRol.resx">
-      <DependentUpon>agregarRol.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRol\agregarFuncion.resx">
+      <DependentUpon>agregarFuncion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRol\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRol\Roles.resx">
+      <DependentUpon>Roles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
